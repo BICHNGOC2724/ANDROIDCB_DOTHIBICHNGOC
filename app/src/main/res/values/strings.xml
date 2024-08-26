@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">BTVNB2</string>
+    <string name="app_name">Máy Tính</string>
+    <string name="result">Kết quả</string>
+    <string name="Add">+</string>
+    <string name="Subtract">-</string>
+    <string name="Multiply">*</string>
+    <string name="Divide">/</string>
+    <string name="Modulus">%</string>
+
 </resources>

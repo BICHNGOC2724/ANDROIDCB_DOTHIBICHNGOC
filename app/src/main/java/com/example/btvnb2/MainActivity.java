@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
 
-        private EditText etNumber1, etNumber2;
+        private EditText txtX, txtY;
         private TextView tvResult;
         private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnModulus;
 
@@ -17,9 +17,12 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+            initControl();
+        }
+        private void initControl() {
 
-            etNumber1 = findViewById(R.id.etNumber1);
-            etNumber2 = findViewById(R.id.etNumber2);
+            txtX = findViewById(R.id.txtX);
+            txtY = findViewById(R.id.txtY);
             tvResult = findViewById(R.id.tvResult);
             btnAdd = findViewById(R.id.btnAdd);
             btnSubtract = findViewById(R.id.btnSubtract);
@@ -62,38 +65,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    private void calculate(char operator) {
+        int x = Integer.parseInt(txtX.getText().toString());
+        int y = Integer.parseInt(txtY.getText().toString());
+        int result = 0;
+        boolean error = false;
 
-        private void calculate(char operator) {
-            double num1 = Double.parseDouble(etNumber1.getText().toString());
-            double num2 = Double.parseDouble(etNumber2.getText().toString());
-            double result = 0;
-
-            switch (operator) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-                case '-':
-                    result = num1 - num2;
-                    break;
-                case '*':
-                    result = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 != 0)
-                        result = num1 / num2;
-                    else
-                        tvResult.setText("Error: Division by zero");
-                    return;
-                case '%':
-                    if (num2 != 0)
-                        result = num1 % num2;
-                    else
-                        tvResult.setText("Error: Division by zero");
-                    return;
-            }
-
-            tvResult.setText("Result: " + result);
+        switch (operator) {
+            case '+':
+                result = x +  y;
+                break;
+            case '-':
+                result = x - y;
+                break;
+            case '*':
+                result = x * y;
+                break;
+            case '/':
+                if (y != 0) {
+                    result = x / y;
+                } else {
+                    tvResult.setText("Lỗi: Chia cho 0");
+                    error = true;
+                }
+                break;
+            case '%':
+                if (y != 0) {
+                    result = x % y;
+                } else {
+                    tvResult.setText("Lỗi: Chia cho 0");
+                    error = true;
+                }
+                break;
         }
+
+        if (!error) {
+            tvResult.setText("Kết quả: " + result);
+        }
+    }
 
 
 }
